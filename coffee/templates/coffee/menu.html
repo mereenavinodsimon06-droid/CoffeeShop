@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+   
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6)),
+            url("https://images.unsplash.com/photo-1509042239860-f550ce710b93");
+            background-size: cover;
+            background-attachment: fixed;
+            color: #030303;
+        }
+
+
+        /* Menu */
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin: 15px 0 10px;
+            font-weight: bold;
+        }
+
+        .menu-card {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: transform .3s;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .menu-card img {
+            width: 100%;
+            height:200px;
+            object-fit: cover;
+        }
+
+        .menu-body {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .menu-body h5 {
+            font-weight: 600;
+        }
+
+        .price {
+            font-size: 18px;
+            margin: 8px 0;
+        }
+
+        .order-btn {
+            background: #8b5e3c;
+            color: #fff;
+            border-radius: 30px;
+            padding: 8px 20px;
+            text-decoration: none;
+        }
+
+        .order-btn:hover {
+            background: #6f4628;
+            color: #fff;
+        }
+
+ /* ===== NAVBAR ===== */
+        nav {
+            background: #4b2e2e;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav h2 {
+            color: #fff;
+            font-weight: 700;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: 500;
+        }
+
+        nav ul li a:hover {
+            color: #ddb892;
+        }
+
+        /* ===== MENU HEADER ===== */
+        .menu-header {
+            text-align: center;
+            margin: 60px 0 20px;
+            animation: fadeDown 1.2s ease-in-out;
+        }
+
+        .menu-header h1 {
+            font-size: 3rem;
+            color: #fffefe;
+        }
+
+        .menu-header h1::after {
+            content: '';
+            width: 90px;
+            height: 2px;
+            background: #fdefe4;
+            display: block;
+            margin: 12px auto;
+            border-radius: 10px;
+        }
+
+        .menu-header p {
+            color: #ffffff;
+            font-size: 1.1rem;
+        }
+
+        /* ===== SECTION TITLE ===== */
+        .section-title {
+            text-align: center;
+            margin: 20px 0 10px;
+            font-size: 2rem;
+            color: #ffffff;
+        }
+
+        /* ===== MENU GRID ===== */
+        .menu-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap:15px;
+            padding: 20px 50px;
+        }
+
+        .menu-card {
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            transition: transform 0.3s;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .menu-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .menu-info {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .menu-info h3 {
+            color: #ffffff;
+            font-size: 1.3rem;
+        }
+
+        .menu-info p {
+            margin: 8px 0;
+            color: #ffffff;
+        }
+
+        .menu-info button {
+            margin-top: 10px;
+            padding: 10px 22px;
+            border: none;
+            border-radius: 25px;
+            background: #7f5539;
+            color: #0c0c0c;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .menu-info button:hover {
+            background: #9c6644;
+        }
+
+        @keyframes fadeDown {
+            from {
+                opacity: 0;
+                transform: translateY(-25px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav>
+    <h2>Coffee Shop</h2>
+    <ul>
+        <li><a href="/home/">Home</a></li>
+        <li><a href="/menu/">Menu</a></li>
+        <li><a href="/about/">About</a></li>
+        {% if user.is_authenticated %}
+                <li class="nav-item ms-3">
+                    <span class="badge bg-warning text-dark p-2">
+                        👤 {{ user.username }}
+                    </span>
+                </li>
+
+                <li class="nav-item ms-2">
+                    <a class="coffee-btn" href="{% url 'logout' %}">
+                        Logout
+                    </a>
+                </li>
+            {% else %}
+                <li class="nav-item ms-3">
+                    <a class="coffee-btn" href="{% url 'signup' %}">
+                        Sign Up
+                    </a>
+                </li>
+
+                <li class="nav-item ms-2">
+                    <a class="btn btn-warning btn-sm" href="{% url 'login' %}">
+                        Login
+                    </a>
+                </li>
+            {% endif %}
+    </ul>
+</nav>
+
+<!-- ===== HEADER ===== -->
+<div class="menu-header">
+    <h1>Signature Café Menu</h1>
+    <p>Freshly brewed coffee & delicious snacks</p>
+</div>
+
+<!-- SPACE FOR FIXED NAVBAR -->
+<div style="height:80px;"></div>
+
+<div class="container py-5">
+<h1></h1>
+    <!-- COFFEE☕ -->
+    <h2 class="section-title"> Coffee☕</h2>
+    <div class="row g-4">
+        {% for item in items %}
+        {% if item.category == 'coffee' %}
+        <div class="col-md-4 col-sm-6">
+            <div class="menu-card">
+                <img src="{{ item.image }}" alt="{{ item.name }}">
+                <div class="menu-body">
+                    <h5>{{ item.name }}</h5>
+                    <div class="price">₹{{ item.price }}</div>
+                    <a href="{% url 'place_order' item.id %}" class="order-btn">Order Now</a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+
+    <!-- SNACKS🍪 -->
+    <h2 class="section-title">Snacks🍪</h2>
+    <div class="row g-4">
+        {% for item in items %}
+        {% if item.category == 'snack' %}
+        <div class="col-md-4 col-sm-6">
+            <div class="menu-card">
+                <img src="{{ item.image }}" alt="{{ item.name }}">
+                <div class="menu-body">
+                    <h5>{{ item.name }}</h5>
+                    <div class="price">₹{{ item.price }}</div>
+                    <a href="{% url 'place_order' item.id %}" class="order-btn">Order Now</a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

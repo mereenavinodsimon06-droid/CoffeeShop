@@ -1,0 +1,157 @@
+
+{% extends 'coffee/base.html' %}
+
+{% block content %}
+<style>
+    body {
+        background: linear-gradient(rgba(0,0,0,.65), rgba(0,0,0,.65)),
+        url("https://images.unsplash.com/photo-1690983325598-dd23fcf8f835?q=80&w=1170&auto=format&fit=crop");
+        background-size: cover;
+        background-attachment: fixed;
+    }
+
+    /* Main Container */
+    .about-container {
+        background: rgba(255,255,255,0.92);
+        backdrop-filter: blur(6px);
+        border-radius: 25px;
+        animation: fadeUp 1.2s ease;
+    }
+
+    /* Animations */
+    @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(40px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes glow {
+        0% { box-shadow: 0 0 5px #6f4e37; }
+        50% { box-shadow: 0 0 20px #6f4e37; }
+        100% { box-shadow: 0 0 5px #6f4e37; }
+    }
+
+    @keyframes float {
+        0% { transform: translateY(0); }
+        50% { transform: translateY(-6px); }
+        100% { transform: translateY(0); }
+    }
+
+    /* HERO HEADING */
+    .hero-title {
+        font-size: 3rem;
+        font-weight: 800;
+        color: #3e2723;
+        text-align: center;
+        animation: float 3s ease-in-out infinite;
+    }
+
+    .hero-title span {
+        color: #6f4e37;
+    }
+
+    .hero-line {
+        width: 120px;
+        height: 4px;
+        background: #6f4e37;
+        margin: 15px auto;
+        border-radius: 20px;
+        animation: glow 2s infinite;
+    }
+
+    /* Thought / Quote */
+    .coffee-thought {
+        text-align: center;
+        font-style: italic;
+        font-size: 1.1rem;
+        color: #555;
+        animation: fadeUp 1.8s ease;
+    }
+
+    /* Cards */
+    .feature-card {
+        border-radius: 15px;
+        transition: 0.4s ease;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-10px) scale(1.03);
+        box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    }
+</style>
+
+<div class="container mt-5 p-5 about-container">
+
+    <!-- HERO HEADING -->
+    <div class="mb-5">
+        <h1 class="hero-title">
+            Welcome to <span>Our Coffee House</span> ☕
+        </h1>
+        <div class="hero-line"></div>
+        <p class="coffee-thought">
+            “A good day begins with a great cup of coffee and a peaceful place to enjoy it.”
+        </p>
+    </div>
+
+    <!-- Intro Section -->
+    <div class="row align-items-center mb-5">
+        <div class="col-md-6 mb-4">
+            <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93"
+                 class="img-fluid rounded shadow"
+                 alt="Coffee shop">
+        </div>
+
+        <div class="col-md-6">
+            <h3 class="fw-bold">About Our Café</h3>
+            <p class="text-muted">
+                We are a cozy café where every cup is brewed with passion and every visit
+                feels like a warm escape from the busy world.
+            </p>
+        </div>
+    </div>
+
+    <!-- Why Choose Us -->
+    <div class="row text-center mt-5">
+        <div class="col-md-4 mb-4">
+            <div class="card feature-card h-100">
+                <div class="card-body">
+                    <h5>☕ Premium Coffee</h5>
+                    <p class="text-muted">
+                        Carefully selected beans, freshly brewed for perfect taste.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card feature-card h-100">
+                <div class="card-body">
+                    <h5>🍰 Fresh Snacks</h5>
+                    <p class="text-muted">
+                        Homemade cakes, cookies, and treats baked with love.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card feature-card h-100">
+                <div class="card-body">
+                    <h5>😊 Warm Service</h5>
+                    <p class="text-muted">
+                        Friendly faces and a welcoming atmosphere every day.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Closing -->
+    <div class="text-center mt-5">
+        <h5 class="fw-bold">Thank you for being part of our story ❤️</h5>
+        <p class="text-muted">
+            Sit back, sip slowly, and let coffee make your day better.
+        </p>
+    </div>
+
+</div>
+{% endblock %}

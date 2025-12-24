@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Placed | Coffee House</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #1f4037, #99f2c8);
+            min-height: 100vh;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            background-color: #4b2e2e;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .nav-link {
+            color: #f5f5f5 !important;
+            margin-right: 15px;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            color: #f3c892 !important;
+        }
+
+        /* ORDER CARD */
+        .order-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 70px);
+        }
+
+        .order-card {
+            background: white;
+            padding: 45px 40px;
+            border-radius: 22px;
+            width: 380px;
+            text-align: center;
+            box-shadow: 0 20px 45px rgba(0,0,0,0.3);
+            animation: scaleUp 0.8s ease;
+        }
+
+        @keyframes scaleUp {
+            0% {
+                transform: scale(0.6);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .check-icon {
+            font-size: 65px;
+            color: #2ecc71;
+            animation: bounce 1.5s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        h2 {
+            margin-top: 15px;
+            color: #2c3e50;
+            font-weight: 700;
+        }
+
+        p {
+            color: #555;
+            font-size: 15px;
+            margin-top: 10px;
+        }
+
+        .btn-custom {
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn-menu {
+            background: #6f4e37;
+            color: white;
+            border: none;
+        }
+
+        .btn-menu:hover {
+            background: #8b5e3c;
+        }
+
+        .btn-home {
+            background: #ecf0f1;
+            border: 1px solid #ccc;
+        }
+
+        .btn-home:hover {
+            background: #dcdde1;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR (SAME STYLE) -->
+<nav class="navbar navbar-expand-lg navbar-dark px-4">
+    <a class="navbar-brand" href="{% url 'home' %}">☕ Coffee House</a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'home' %}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'menu' %}">Menu</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'about' %}">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- ORDER SUCCESS -->
+<div class="order-container">
+    <div class="order-card">
+        <div class="check-icon">✔</div>
+
+        <h2>Order Is Placed Successfully!</h2>
+
+        <p>
+            Thank you for ordering from <strong>Coffee House</strong> ☕  
+            <br>Your coffee & snacks are being prepared with love ❤️
+        </p>
+
+        <div class="d-flex justify-content-center gap-3 mt-4">
+            <a href="{% url 'menu' %}" class="btn btn-custom btn-menu">Back to Menu</a>
+            <a href="{% url 'home' %}" class="btn btn-custom btn-home">Home</a>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
