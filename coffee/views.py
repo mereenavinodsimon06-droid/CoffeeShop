@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from .models import MenuItem,Order
 
 def home(request):
-    return render(request, 'coffee/home.html')
+    return render(request, 'coffee/index.html')
 
 def menu(request):
     items = MenuItem.objects.all()
