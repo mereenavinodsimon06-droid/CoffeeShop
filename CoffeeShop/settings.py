@@ -10,24 +10,31 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
+import os
 from pathlib import Path
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# BASE_DIR already exists
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
-
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-9)27lw1)t6(b%0xrh!4xls1qbla6n2yx)40!o*!d7cusvqm2xw'
+SECRET_KEY = 'your-secret-key-here'  # Keep this secret in production
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True       
-ALLOWED_HOSTS = ['*']   
+# Allow only your Render domain (replace with your actual Render URL after deployment)
+ALLOWED_HOSTS = ['your-app-name.onrender.com', 'localhost', '127.0.0.1']
 
+# Static files (CSS, JavaScript, Images)
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Collect static files here
+
+# Optional: for media files if you have images uploaded
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'  
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# For production, turn DEBUG off
+DEBUG = False  # Set to True only for local testing
+
+ALLOWED_HOSTS = ['coffeeshop.onrender.com', '127.0.0.1', 'localhost']
+
 
 
 # Application definition
@@ -81,7 +88,7 @@ WSGI_APPLICATION = 'CoffeeShop.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
@@ -119,9 +126,6 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
-
-STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'login'
