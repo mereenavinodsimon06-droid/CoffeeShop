@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from .models import MenuItem,Order
 from django.contrib.auth import logout
 
+
 def home(request):
     return render(request, 'coffee/index.html')
 
@@ -21,11 +22,7 @@ from django.contrib.auth.decorators import login_required
 @login_required(login_url='login')
 def place_order(request, item_id):
     item = get_object_or_404(MenuItem, id=item_id)
-
-    Order.objects.create(
-        user=request.user,
-        item=item
-    )
+    Order.objects.create(user=request.user, item=item)
     return redirect('my_order')
     
 
@@ -38,10 +35,12 @@ def signup_view(request):
         username = request.POST.get("username")
         password = request.POST.get("password")
 
+        # Check if username already exists
         if User.objects.filter(username=username).exists():
             messages.error(request, "Username already exists")
             return render(request, "coffee/signup.html")
 
+        # Create new user with hashed password
         User.objects.create_user(username=username, password=password)
         messages.success(request, "Account created successfully")
         return redirect("login")
@@ -57,11 +56,12 @@ def login_view(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('home')  
+            return redirect('home')  # Redirect to home page after login
         else:
             messages.error(request, "Invalid username or password")
 
     return render(request, 'coffee/login.html')
+
 
 def logout_view(request):
     logout(request)
