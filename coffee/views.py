@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from .models import MenuItem,Order
+from django.contrib.auth import logout
 
 def home(request):
     return render(request, 'coffee/index.html')
@@ -15,7 +16,9 @@ def menu(request):
 def my_order(request):
     return render(request, 'coffee/order.html')
 
-@login_required
+from django.contrib.auth.decorators import login_required
+
+@login_required(login_url='login')
 def place_order(request, item_id):
     item = get_object_or_404(MenuItem, id=item_id)
 
@@ -23,8 +26,8 @@ def place_order(request, item_id):
         user=request.user,
         item=item
     )
-
-    return redirect('my_order')    
+    return redirect('my_order')
+    
 
 def about(request):
     return render(request, 'coffee/about.html')
@@ -54,9 +57,13 @@ def login_view(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('home')
+            return redirect('home')  
         else:
             messages.error(request, "Invalid username or password")
 
     return render(request, 'coffee/login.html')
+
+def logout_view(request):
+    logout(request)
+    return redirect('login')
 
